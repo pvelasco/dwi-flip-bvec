@@ -1,0 +1,89 @@
+#! /bin/bash
+#
+#
+
+CONTAINER="[scitran-apps/dwi-flip-bvec]"
+echo -e "$CONTAINER  Initiated"
+
+
+# Built to flywheel-v0 spec.
+FLYWHEEL_BASE=/flywheel/v0
+MCR_ROOT=/opt/mcr/v93/
+OUTPUT_DIR=$FLYWHEEL_BASE/output
+
+
+# Make sure that /output directory exists
+if [[ ! -d "$OUTPUT_DIR" ]]
+    then
+        echo "$CONTAINER  $OUTPUT_DIR not found!"
+        exit 1
+fi
+
+
+# Set paths to input files
+bvecFile=$(find $FLYWHEEL_BASE/input/bvec/ -type f -name "*.bvec*")
+CONFIG_FILE=${FLYWHEEL_BASE}/config.json
+
+# Check for required inputs
+if [[ -z "$bvecFile" ]]; then
+  echo -e "$CONTAINER  Bvec input file not found! Exiting!"
+  exit 1
+fi
+
+
+# Parse Config File
+if [[ -f $CONFIG_FILE ]]; then
+  # Parse config from config.json
+  echo -e "$CONTAINER  Loading configuration from ${CONFIG_FILE}"
+  xFlip=$(cat $CONFIG_FILE | jq -r '.config.xFlip')
+  yFlip=$(cat $CONFIG_FILE | jq -r '.config.yFlip')
+  zFlip=$(cat $CONFIG_FILE | jq -r '.config.zFlip')
+  echo "$CONTAINER  xFlip has been set to $xFlip"
+  echo "$CONTAINER  yFlip has been set to $yFlip"
+  echo "$CONTAINER  zFlip has been set to $zFlip"
+else
+  # Parse defaults from the manifest.json
+  CONFIG_FILE=$FLYWHEEL_BASE/manifest.json
+  echo -e "$CONTAINER  Loading defaults from ${CONFIG_FILE}"
+  xFlip=$(cat $CONFIG_FILE | jq -r '.config.xFlip.default')
+  yFlip=$(cat $CONFIG_FILE | jq -r '.config.yFlip.default')
+  zFlip=$(cat $CONFIG_FILE | jq -r '.config.zFlip.default')
+  echo "$CONTAINER  xFlip has been set to $xFlip"
+  echo "$CONTAINER  yFlip has been set to $yFlip"
+  echo "$CONTAINER  zFlip has been set to $zFlip"
+fi
+
+
+# Run the Matlab executable
+time /msa/run_dwiflipbvec.sh "${MCR_ROOT}" "${bvecFile}" "${xFlip}" "${yFlip}" "${zFlip}"  "${OUTPUT_DIR}"
+
+
+# Check exit status
+exit_status=$?
+if [[ $exit_status != 0 ]]; then
+  echo -e "$CONTAINER  An error occurred during execution of the Matlab executable. Exiting!"
+  exit 1
+fi
+
+
+# Get a list of the files in the output directory
+outputs=$(find $OUTPUT_DIR/* -maxdepth 0 -type f)
+
+
+# If outputs exist, generate metadata, and exit
+if [[ -z $outputs ]]; then
+  echo "$CONTAINER  No results found in output directory... Exiting"
+  exit 1
+else
+  cd $OUTPUT_DIR
+  echo -e "$CONTAINER  Wrote: `ls`"
+  echo -e "$CONTAINER  Done!"
+fi
+
+
+# Handle permissions of the outputs
+chmod -R 777 $OUTPUT_DIR
+
+
+# Exit
+exit 0
