@@ -2,7 +2,7 @@
 #
 #
 
-CONTAINER="[scitran-apps/dwi-flip-bvec]"
+CONTAINER="[scitran/dwi-flip-bvec]"
 echo -e "$CONTAINER  Initiated"
 
 

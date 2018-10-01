@@ -1,7 +1,7 @@
 {
   "name": "dwi-flip-bvec",
-  "label": "SCITRAN: DWI Flip Bvec",
-  "description": "Flip the sign of the bvec vector in the specified vector(s). ",
+  "label": "SCITRAN: DWI Flip BVECs",
+  "description": "Flip the sign of the bvec vector in the specified vector(s).",
   "author": "GLU <glerma@stanford.edu>",
   "maintainer": "GLU <glerma@stanford.edu>",
   "url": "https://github.com/scitran-apps/dwi-flip-bvec",
