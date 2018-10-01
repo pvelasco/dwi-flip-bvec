@@ -1,4 +1,4 @@
-FROM flywheel/matlab-mcr:v93
+FROM flywheel/matlab-mcr:v92
 
 MAINTAINER Garikoitz Lerma-Usabiaga <glerma@stanford.edu>
 
@@ -17,4 +17,3 @@ RUN chmod +x ${FLYWHEEL}/run
 
 # Configure entrypoints-
 ENTRYPOINT ["/flywheel/v0/run"]
-
