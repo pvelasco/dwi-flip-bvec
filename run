@@ -8,7 +8,7 @@ echo -e "$CONTAINER  Initiated"
 
 # Built to flywheel-v0 spec.
 FLYWHEEL_BASE=/flywheel/v0
-MCR_ROOT=/opt/mcr/v93/
+MCR_ROOT=/opt/mcr/v92/
 OUTPUT_DIR=$FLYWHEEL_BASE/output
 
 
