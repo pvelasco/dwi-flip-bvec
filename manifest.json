@@ -1,16 +1,18 @@
 {
   "name": "dwi-flip-bvec",
-  "label": "SCITRAN: DWI Flip BVECs",
-  "description": "Flip the sign of the bvec vector in the specified vector(s).",
+  "label": "VISTA Lab: DWI Flip BVEC",
+  "description": "Flips the sign of the the specified B-vector(s).",
   "author": "GLU <glerma@stanford.edu>",
   "maintainer": "GLU <glerma@stanford.edu>",
-  "url": "https://github.com/scitran-apps/dwi-flip-bvec",
-  "source": "https://github.com/scitran-apps/dwi-flip-bvec",
+  "url": "https://github.com/vistalab/dwi-flip-bvec",
+  "source": "https://github.com/vistalab/dwi-flip-bvec",
   "license": "MIT",
-  "flywheel": "0",
+  "flywheel": {
+    "suite": "VISTA Lab"
+  },
   "version": "1.0.0",
   "custom": {
-    "docker-image": "scitran/dwi-flip-bvec:1.0.0"
+    "docker-image": "vistalab/dwi-flip-bvec:1.0.0"
   },
   "config": {
     "xFlip": {
