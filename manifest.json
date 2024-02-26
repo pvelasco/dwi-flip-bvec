@@ -4,7 +4,7 @@
   "description": "Flips the sign of the the specified B-vector(s).",
   "author": "GLU <glerma@stanford.edu>",
   "maintainer": "GLU <glerma@stanford.edu>",
-  "url": "https://github.com/vistalab/dwi-flip-bvec",
+  "url": "https://github.com/pvelasco/dwi-flip-bvec",
   "source": "https://github.com/vistalab/dwi-flip-bvec",
   "license": "MIT",
   "flywheel": {
@@ -14,30 +14,27 @@
   "custom": {
     "docker-image": "vistalab/dwi-flip-bvec:1.0.0",
     "gear-builder": {
-      "category": "utility"
+      "category": "analysis"
     },
     "flywheel": {
       "classification": {
         "species": [
-          "Animal",
-          "Phantom"
+          ""
         ],
         "organ": [
-          "Brain",
-          "Prostate",
-          "Heart"
+          ""
         ],
         "therapeutic_area": [
-          "Any"
+          ""
         ],
         "modality": [
-          "Any"
+          ""
         ],
         "function": [
-          "Curation"
+          ""
         ]
       },
-      "suite": "Curation"
+      "suite": ""
     }
   },
   "config": {
